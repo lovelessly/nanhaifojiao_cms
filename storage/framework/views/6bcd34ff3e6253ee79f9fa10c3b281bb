@@ -1,0 +1,12 @@
+<?php $__env->startSection('main'); ?>
+<section class="mala-content" style="margin:0px;text-align:center;">
+<h1 class="mala-title-bar"><?php echo e($materialsdata['Title']); ?></h1>
+<br>
+<span>上传日期：<?php echo e($materialsdata['Create_Time']); ?> &nbsp;&nbsp;&nbsp;修改日期：<?php echo e($materialsdata['Update_Time']); ?></span>
+<br>
+<br>
+<img src="<?php echo $materialsdata['Materials_Url']; ?>" style='max-width:100%;'/>
+</section>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.leftbarbase', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
