@@ -143,7 +143,7 @@
 										<label for="" class="mala-label mala-form-fix">
 											<span class="mala-required">*</span>上传视频</label>
 									</div>
-									<input onchange="" style='display:none' type="file" name="file" id="upload_file" />
+									<input onchange="$('#preview').html('视频预上传已完成')" style='display:none' type="file" name="file" id="upload_file" />
 									<div class="mala-col-md-3"><span class="mala-btn mala-btn-default mala-btn-block" onclick='upload_pic(this.className);$("#upload_file").click();'>点击上传</span>
 										<br>
 										<div id='preview'>

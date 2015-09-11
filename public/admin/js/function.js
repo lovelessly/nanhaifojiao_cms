@@ -271,6 +271,8 @@ function fupdate(obj){
 
 }
 
+
+//新闻模块
 function newspost(){
 	var html = UE.getEditor('editor').getContent();
 	var first = $('#firstmenu').val();
@@ -324,3 +326,56 @@ function newsupdate(){
     });
 }
 
+//活动模块
+function activitypost(){
+	var html = UE.getEditor('editor').getContent();
+	var first = $('#firstmenu').val();
+	var second = $('#secondmenu').val();
+	var title = $('#title').val();
+	$.ajax({
+        type: "POST",
+        async: true, //同步执行
+        url: '../api/activityinsert',
+        data: {'Title':title, 'FirstLevel':first,'SecondLevel':second,'Content':html},
+        dataType: "jsonp", //返回数据形式为json
+        callback: "callback",
+        success: function (result) {
+			if(result.status == 0){
+				alert(result.Msg);
+				window.location.href = './activity?Page=1';
+			}else{
+				alert(result.errorMsg);
+			}
+		},
+        error: function (errorMsg) {
+			alert('后端服务异常');
+        }
+    });
+}
+
+function activityupdate(){
+	var ContentID = parseInt(Request('Content_ID'));
+	var html = UE.getEditor('editor').getContent();
+	var first = $('#firstmenu').val();
+	var second = $('#secondmenu').val();
+	var title = $('#title').val();
+	$.ajax({
+        type: "POST",
+        async: true, //同步执行
+        url: '../api/activityupdate',
+        data: {'ContentID':ContentID, 'Title':title, 'FirstLevel':first,'SecondLevel':second,'Content':html},
+        dataType: "jsonp", //返回数据形式为json
+        callback: "callback",
+        success: function (result) {
+			if(result.status == 0){
+				alert(result.Msg);
+				window.location.href = './activity?Page=1';
+			}else{
+				alert(result.errorMsg);
+			}
+		},
+        error: function (errorMsg) {
+			alert('后端服务异常');
+        }
+    });
+}

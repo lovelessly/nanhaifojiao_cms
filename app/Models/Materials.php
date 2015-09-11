@@ -178,6 +178,24 @@ Class Materials {
 		return $ret;
 	}
 
+	//添加一条新的活动
+	public function insertActivity($Content, $Title, $FirstLevel, $SecondLevel){
+		$create_time = strftime("%Y-%m-%d %H:%M:%S", time());
+		$data_array = array(
+			'Content' => $Content,
+			'Materials_Url' => '',
+			'Title' => $Title,
+			'Content_type' => 4,
+			'Poster' => Session::get('User_Name', 'Somebody'),
+			'FirstLevel' => $FirstLevel,
+			'SecondLevel' => $SecondLevel,
+			'Create_Time' => $create_time,
+			'Update_Time' => $create_time,
+			);
+		$ret = DB::table('materials')->insert($data_array);
+		return $ret;
+	}
+
 }
 
 ?>

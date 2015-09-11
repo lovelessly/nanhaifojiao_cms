@@ -71,8 +71,9 @@ $(".registerform").Validform({
 		ajaxPost:true,
 		beforeSubmit:function(curform){
 			var newpass = "{{Session::get('tk')}}";
-			var pass = hex_sha1(hex_sha1($('#password').val()) + newpass);
+			var pass = hex_sha1(hex_sha1($('#password-input').val()) + newpass);
 			$('#password').val(pass);
+			$('#password-input').val('****************');
 		},
 	callback:function(data){
 		if(data.status != 0){
@@ -131,8 +132,9 @@ $(".registerform").Validform({
   
   <div class="fm-item">
 	   <label for="logonId" class="form-label">登陆密码：</label>
-	   <input type="password" value="" maxlength="100" name='password' id="password" class="i-text" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！">    
+	   <input type="password" value="" maxlength="20" name='password-input' id="password-input" class="i-text" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！">    
        <div class="ui-form-explain"></div>
+       <input type="password" style="display:none" name='password' id="password">
   </div>
   
   

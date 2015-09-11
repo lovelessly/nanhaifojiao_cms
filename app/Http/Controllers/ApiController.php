@@ -342,6 +342,67 @@ class ApiController extends Controller {
 		}
 	}
 
+	//添加一条活动
+	public function postActivityinsert(){
+
+		//检查是否登录，是否有权限
+		$UserModel = new User();
+		$auth = $UserModel->checkAdmin();
+		if(!$auth){
+			return redirect('admin/index');
+		}
+
+		$MaterialsModel = new Materials();
+
+		$Content = Request::input('Content');
+		$Title = Request::input('Title');
+		$FirstLevel = Request::input('FirstLevel');
+		$SecondLevel = Request::input('SecondLevel');
+
+		$res = $MaterialsModel->insertActivity($Content, $Title, $FirstLevel, $SecondLevel);
+
+		$Jsonp = new Jsonp();
+		
+		if($res){
+			$a = json_encode(array('status' => 0, 'errorMsg' => '', 'data' => array(), 'Msg' => 'Successful Insert!!'));
+			echo $Jsonp->toJsonp($a);
+		}else{
+			$a = json_encode(array('status' => -1, 'errorMsg' => 'Insert Faild', 'data' => array(), 'Msg' => ''));
+			echo  $Jsonp->toJsonp($a);
+		}
+	}
+
+	//修改一条活动
+	public function postActivityupdate(){
+
+		//检查是否登录，是否有权限
+		$UserModel = new User();
+		$auth = $UserModel->checkAdmin();
+		if(!$auth){
+			return redirect('admin/index');
+		}
+
+		$MaterialsModel = new Materials();
+
+		$ContentID = Request::input('ContentID');
+		$Content = Request::input('Content');
+		$Title = Request::input('Title');
+		$FirstLevel = Request::input('FirstLevel');
+		$SecondLevel = Request::input('SecondLevel');
+
+		$res = $MaterialsModel->updateMaterials($ContentID, $Content, '', $Title, 4, $FirstLevel, $SecondLevel);
+
+		$Jsonp = new Jsonp();
+		
+		if($res){
+			$a = json_encode(array('status' => 0, 'errorMsg' => '', 'data' => array(), 'Msg' => 'Successful update!!'));
+			echo $Jsonp->toJsonp($a);
+		}else{
+			$a = json_encode(array('status' => -1, 'errorMsg' => 'Update Faild', 'data' => array(), 'Msg' => ''));
+			echo  $Jsonp->toJsonp($a);
+		}
+	}
+
 	//删除一个用户
 	public function getDeluser(){
 		//检查是否登录，是否有权限
